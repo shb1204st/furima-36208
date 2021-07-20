@@ -6,7 +6,7 @@
 | ------------------ | ------ | ----------- |
 | nickname           | text   | null: false |
 | email              | string | null: false |
-| password           | string | null: false |
+| encrypted_password | string | null: false |
 | name               | string | null: false |
 | kana_name          | string | null: false |
 | birthday           | string | null: false |
