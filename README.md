@@ -19,15 +19,15 @@
 
 ## addressesテーブル
 
-| Column        | Type       | Options                        |
-| ------------- | ---------- | ------------------------------ |
-| post_code     | string     | null: false                    |
-| seller_place  | integer    | null: false                    |
-| city          | string     | null: false                    |
-| address       | string     | null: false                    |
-| build_name    | string     | default: ""                    |
-| phone_num     | string     | null: false                    |
-| buys          | references | null: false, foreign_key: true |
+| Column          | Type       | Options                        |
+| --------------- | ---------- | ------------------------------ |
+| post_code       | string     | null: false                    |
+| seller_place_id | integer    | null: false                    |
+| city            | string     | null: false                    |
+| address         | string     | null: false                    |
+| build_name      | string     |                                |
+| phone_num       | string     | null: false                    |
+| buy             | references | null: false, foreign_key: true |
 
 
 ### Association
@@ -46,22 +46,21 @@
 | need_days_id       | integer    | null: false                    |
 | price              | integer    | null: false                    |
 | user               | references | null: false, foreign_key: true |
-| products           | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :user
-- belongs_to :buy
+- has_one    :buy
 
 ## buysテーブル
 
 | Column             | Type       | Options                        |
 | ------------------ | ---------- | ------------------------------ |
-| users              | references | null: false, foreign_key: true |
-| products           | references | null: false, foreign_key: true |
+| user               | references | null: false, foreign_key: true |
+| product            | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :user
 - belongs_to :product
-- belongs_to :address
+- has_one    :address
