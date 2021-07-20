@@ -16,22 +16,22 @@
 ### Association
 - has_many :buys
 - has_many :products
-- belongs_to :address
 
 ## addressesテーブル
 
 | Column        | Type       | Options                        |
 | ------------- | ---------- | ------------------------------ |
-| post_code     | integer    | null: false                    |
-| prefecture_id | integer    | null: false                    |
+| post_code     | string     | null: false                    |
+| seller_place  | integer    | null: false                    |
 | city          | string     | null: false                    |
 | address       | string     | null: false                    |
-| build_name    | string     | null: false, default: ""       |
-| phone_num     | integer    | null: false                    |
-| user          | references | null: false, foreign_key: true | 
+| build_name    | string     | default: ""                    |
+| phone_num     | string     | null: false                    |
+| buys          | references | null: false, foreign_key: true |
+
 
 ### Association
-- has_one :user
+- belongs_to :buy
 
 ## productsテーブル
 
@@ -46,11 +46,12 @@
 | need_days_id       | integer    | null: false                    |
 | price              | integer    | null: false                    |
 | user               | references | null: false, foreign_key: true |
+| products           | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :user
-- has_many   :buys
+- belongs_to :buy
 
 ## buysテーブル
 
@@ -63,3 +64,4 @@
 
 - belongs_to :user
 - belongs_to :product
+- belongs_to :address
