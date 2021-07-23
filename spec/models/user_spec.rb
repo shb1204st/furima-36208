@@ -78,19 +78,43 @@ RSpec.describe User, type: :model do
         expect(@user.errors.full_messages).to include("First name can't be blank")
       end
 
-      it 'first_nameが全角（漢字・ひらがな・カタカナ）でなければ登録できないこと' do
-        @user.kana_first_name = "ｽｽﾞｷ"
-        @user.valid?
-        expect(@user.errors.full_messages).to include("Kana first name is invalid")
-      end
-
-      it 'Last_nameが空では登録できないこと' do
+      it 'last_nameが空では登録できないこと' do
         @user.last_name = ""
         @user.valid?
         expect(@user.errors.full_messages).to include("Last name can't be blank")
       end
 
       it 'first_nameが全角（漢字・ひらがな・カタカナ）でなければ登録できないこと' do
+        @user.first_name = "ｽｽﾞｷ"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("First name is invalid")
+      end
+
+      it 'last_nameが全角（漢字・ひらがな・カタカナ）でなければ登録できないこと' do
+        @user.last_name = "ﾀﾛｳ"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Last name is invalid")
+      end
+
+      it 'kana_first_nameが空では登録できないこと' do
+        @user.kana_first_name = ""
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Kana first name can't be blank")
+      end
+
+      it 'kana_last_nameが空では登録できないこと' do
+        @user.kana_last_name = ""
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Kana last name can't be blank")
+      end
+
+      it 'kana_first_nameが全角（カタカナ）でなければ登録できないこと' do
+        @user.kana_first_name = "ｽｽﾞｷ"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Kana first name is invalid")
+      end
+
+      it 'kana_last_nameが全角（カタカナ）でなければ登録できないこと' do
         @user.kana_last_name = "ﾀﾛｳ"
         @user.valid?
         expect(@user.errors.full_messages).to include("Kana last name is invalid")
@@ -100,32 +124,6 @@ RSpec.describe User, type: :model do
         @user.birthday = ""
         @user.valid?
         expect(@user.errors.full_messages).to include("Birthday can't be blank")
-      end
-    end
-  end
-
-  describe "ユーザーログイン" do
-    before do
-      @user = FactoryBot.build(:user)
-    end
-    
-    context '内容に問題ない場合' do
-      it 'すべての情報があればログインできる' do
-        expect(@user).to be_valid
-      end
-    end
-
-    context '内容に問題がある場合' do
-      it 'emailが空ではログインできないこと' do
-        @user.email = ""
-        @user.valid?
-        expect(@user.errors.full_messages).to include("Email can't be blank")
-      end
-
-      it 'passwordが空ではログインできないこと' do
-        @user.password = ""
-        @user.valid?
-        expect(@user.errors.full_messages).to include("Password can't be blank")
       end
     end
   end
