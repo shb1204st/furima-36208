@@ -7,7 +7,16 @@ class Product < ApplicationRecord
   belongs_to :need_day
 
   #空の投稿を保存できないようにする
-  validates :image, :product_name, :product_explain, presence: true
+  with_options presence: true do
+    validates :image
+    validates :product_name
+    validates :product_explain
+  end
+    
+  validates :price, presence: true, 
+             numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999 },
+             format: { with: /\A[0-9]+\z/ }
+
 
   #ジャンルの選択が「--」の時は保存できないようにする
   validates :category_id, numericality: { other_than: 1 , message: "can't be blank" } 
