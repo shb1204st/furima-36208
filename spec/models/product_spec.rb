@@ -49,7 +49,7 @@ RSpec.describe Product, type: :model do
         expect(@product.errors.full_messages).to include("Cost can't be blank")
       end
 
-      it 'seller_place_idの選択が1では出品できないこと' do
+      it 'seller_place_idの選択が0では出品できないこと' do
         @product.seller_place_id = "0"
         @product.valid?
         expect(@product.errors.full_messages).to include("Seller place can't be blank")
