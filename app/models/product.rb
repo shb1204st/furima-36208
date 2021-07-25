@@ -14,15 +14,18 @@ class Product < ApplicationRecord
   end
 
   validates :price, presence: true,
-                    numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 },
+                    numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999 },
                     format: { with: /\A[0-9]+\z/ }
 
   # ジャンルの選択が「--」の時は保存できないようにする
-  validates :category_id, numericality: { other_than: 1, message: "can't be blank" }
-  validates :product_status_id, numericality: { other_than: 1, message: "can't be blank" }
-  validates :cost_id, numericality: { other_than: 1, message: "can't be blank" }
+  with_options numericality: { other_than: 1, message: "can't be blank" } do
+    validates :category_id
+    validates :product_statu_id
+    validates :cost_id
+    validates :need_day_id
+  end
+
   validates :seller_place_id, numericality: { other_than: 0, message: "can't be blank" }
-  validates :need_days_id, numericality: { other_than: 1, message: "can't be blank" }
 
   belongs_to :user
   has_one_attached :image
