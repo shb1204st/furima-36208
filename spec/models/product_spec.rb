@@ -32,33 +32,33 @@ RSpec.describe Product, type: :model do
       end
 
       it 'category_idの選択が1では出品できないこと' do
-        @product.category_id = '1'
+        @product.category_id = 1
         @product.valid?
         expect(@product.errors.full_messages).to include("Category can't be blank")
       end
 
-      it 'product_status_idの選択が1では出品できないこと' do
-        @product.product_status_id = '1'
+      it 'product_statu_idの選択が1では出品できないこと' do
+        @product.product_statu_id = 1
         @product.valid?
-        expect(@product.errors.full_messages).to include("Product status can't be blank")
+        expect(@product.errors.full_messages).to include("Product statu can't be blank")
       end
 
       it 'cost_idの選択が1では出品できないこと' do
-        @product.cost_id = '1'
+        @product.cost_id = 1
         @product.valid?
         expect(@product.errors.full_messages).to include("Cost can't be blank")
       end
 
       it 'seller_place_idの選択が0では出品できないこと' do
-        @product.seller_place_id = '0'
+        @product.seller_place_id = 0
         @product.valid?
         expect(@product.errors.full_messages).to include("Seller place can't be blank")
       end
 
-      it 'need_days_idの選択が1では出品できないこと' do
-        @product.need_days_id = '1'
+      it 'need_day_idの選択が1では出品できないこと' do
+        @product.need_day_id = 1
         @product.valid?
-        expect(@product.errors.full_messages).to include("Need days can't be blank")
+        expect(@product.errors.full_messages).to include("Need day can't be blank")
       end
 
       it 'priceが空では出品できないこと' do
@@ -68,15 +68,39 @@ RSpec.describe Product, type: :model do
       end
 
       it 'priceが¥300〜9,999,999範囲意外では出品できないこと' do
-        @product.price = '200'
+        @product.price = 200
         @product.valid?
         expect(@product.errors.full_messages).to include('Price must be greater than or equal to 300')
       end
 
-      it 'priceが半角数字意外では出品できないこと' do
+      it 'priceが¥300〜9,999,999範囲意外では出品できないこと' do
+        @product.price = 10000000
+        @product.valid?
+        expect(@product.errors.full_messages).to include('Price must be less than or equal to 9999999')
+      end
+
+      it 'priceが全角文字では出品できないこと' do
         @product.price = '２００'
         @product.valid?
         expect(@product.errors.full_messages).to include('Price is not a number')
+      end
+
+      it 'priceが半角英数混合では出品できないこと' do
+        @product.price = '3000a'
+        @product.valid?
+        expect(@product.errors.full_messages).to include('Price is not a number')
+      end
+
+      it 'priceが半角英字では出品できないこと' do
+        @product.price = 'abcde'
+        @product.valid?
+        expect(@product.errors.full_messages).to include('Price is not a number')
+      end
+
+      it 'userが紐付いていなければ出品できないこと' do
+        @product.user = nil
+        @product.valid?
+        expect(@product.errors.full_messages).to include('User must exist')
       end
     end
   end

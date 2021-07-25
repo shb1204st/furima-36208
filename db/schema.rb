@@ -37,10 +37,10 @@ ActiveRecord::Schema.define(version: 2021_07_23_124236) do
     t.string "product_name", null: false
     t.text "product_explain", null: false
     t.integer "category_id", null: false
-    t.integer "product_status_id", null: false
+    t.integer "product_statu_id", null: false
     t.integer "cost_id", null: false
     t.integer "seller_place_id", null: false
-    t.integer "need_days_id", null: false
+    t.integer "need_day_id", null: false
     t.integer "price", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
