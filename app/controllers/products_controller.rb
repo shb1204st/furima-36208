@@ -3,7 +3,7 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:show]
 
   def index
-    @products = Product.all.order("created_at DESC")
+    @products = Product.all.order('created_at DESC')
   end
 
   def new
@@ -21,7 +21,6 @@ class ProductsController < ApplicationController
     def show
       @product = Product.find(params[:id])
     end
-
   end
 
   private
@@ -34,5 +33,4 @@ class ProductsController < ApplicationController
   def set_product
     @product = Product.find(params[:id])
   end
-
 end
