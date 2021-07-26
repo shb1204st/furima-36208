@@ -14,7 +14,7 @@ class Product < ApplicationRecord
   end
 
   validates :price, presence: true,
-                    numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999 },
+                    numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 },
                     format: { with: /\A[0-9]+\z/ }
 
   # ジャンルの選択が「--」の時は保存できないようにする
