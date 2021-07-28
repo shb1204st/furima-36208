@@ -9,7 +9,7 @@ RSpec.describe BuyAddress, type: :model do
       sleep 0.1 
     end
     context '内容に問題ない場合' do
-      it 'すべての情報があれば登録できる' do
+      it 'すべての情報があれば保存できること' do
         expect(@buy_address).to be_valid
       end
 
@@ -75,10 +75,28 @@ RSpec.describe BuyAddress, type: :model do
         expect(@buy_address.errors.full_messages).to include("Phone num is invalid")
       end
 
-      it "tokenが空では登録できないこと" do
+      it 'phone_numが英数混合であると保存できないこと' do
+        @buy_address.phone_num = '090aa11aa11'
+        @buy_address.valid?
+        expect(@buy_address.errors.full_messages).to include("Phone num is invalid")
+      end
+
+      it "tokenが空では購入できないこと" do
         @buy_address.token = nil
         @buy_address.valid?
         expect(@buy_address.errors.full_messages).to include("Token can't be blank")
+      end
+
+      it "user_idが空では購入できないこと" do
+        @buy_address.user_id = nil
+        @buy_address.valid?
+        expect(@buy_address.errors.full_messages).to include("User can't be blank")
+      end
+
+      it "product_idが空では購入できないこと" do
+        @buy_address.product_id = nil
+        @buy_address.valid?
+        expect(@buy_address.errors.full_messages).to include("Product can't be blank")
       end
 
     end
