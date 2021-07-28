@@ -1,13 +1,10 @@
 class BuysController < ApplicationController
-  before_action :authenticate_user!, only: [:index, :new, :create]
-  before_action :move_to_index, only: [:index, :new, :create]
+  before_action :authenticate_user!, only: [:index, :create]
+  before_action :move_to_index, only: [:index, :create]
   before_action :set_product, only: [:index, :create]
 
   def index
     @buy_address = BuyAddress.new
-  end
-
-  def new
   end
 
   def create
@@ -38,12 +35,13 @@ class BuysController < ApplicationController
     )
   end
 
-  def move_to_index
-    @product = Product.find(params[:product_id])
-    redirect_to root_path if @product.buy
-  end
-
   def set_product
     @product = Product.find(params[:product_id])
   end
+
+  def move_to_index
+    @product = Product.find(params[:product_id])
+    redirect_to root_path if @product.buy || current_user.id == @product.user.id
+  end
+
 end
