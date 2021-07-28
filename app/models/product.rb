@@ -28,5 +28,6 @@ class Product < ApplicationRecord
   validates :seller_place_id, numericality: { other_than: 0, message: "can't be blank" }
 
   belongs_to :user
+  has_one    :buy
   has_one_attached :image
 end
