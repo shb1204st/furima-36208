@@ -127,10 +127,9 @@
       新規投稿商品
     </div>
     <ul class='item-lists'>
-
-      <li class='list'>
-        <% @products.each do |product| %>
-         <%= link_to product_path(product.id) do %>
+      <% @products.each do |product| %>
+        <li class='list'>
+          <%= link_to product_path(product.id) do %>
             <div class='item-img-content'>
               <%= image_tag product.image, class: "item-img" %>
               <% if product.buy %>
@@ -152,8 +151,8 @@
               </div>
             </div>
           <% end %>
-        <% end %>
-      </li>
+        </li>
+      <% end %>
 
       <% if @products[0].nil? %>
         <li class='list'>
