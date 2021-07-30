@@ -2,6 +2,7 @@ class ProductsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_product, only: [:show, :edit, :update, :destroy]
   before_action :move_to_index, only: [:edit, :update, :destroy]
+  before_action :search_product, only: [:index, :search]
 
   def index
     @products = Product.all.order('created_at DESC')
@@ -39,8 +40,9 @@ class ProductsController < ApplicationController
   end
 
   def search
+    @results = @p.result.includes(:category)
   end
-  
+
   private
 
   def product_params
@@ -55,4 +57,9 @@ class ProductsController < ApplicationController
   def move_to_index
     redirect_to action: :index if current_user.id != @product.user.id || @product.buy
   end
+
+  def search_product
+    @p = Product.ransack(params[:q])
+  end
+  
 end
