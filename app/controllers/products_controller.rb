@@ -38,6 +38,9 @@ class ProductsController < ApplicationController
     redirect_to root_path if @product.destroy
   end
 
+  def search
+  end
+  
   private
 
   def product_params
