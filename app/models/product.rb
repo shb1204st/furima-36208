@@ -18,14 +18,14 @@ class Product < ApplicationRecord
                     format: { with: /\A[0-9]+\z/ }
 
   # ジャンルの選択が「--」の時は保存できないようにする
-  with_options numericality: { other_than: 1, message: "can't be blank" } do
+  with_options numericality: { other_than: 1, message: "を選択してください" } do
     validates :category_id
     validates :product_statu_id
     validates :cost_id
     validates :need_day_id
   end
 
-  validates :seller_place_id, numericality: { other_than: 0, message: "can't be blank" }
+  validates :seller_place_id, numericality: { other_than: 0, message: "を選択してください" }
 
   belongs_to :user
   has_one    :buy
