@@ -41,7 +41,7 @@ class ProductsController < ApplicationController
   end
 
   def search
-    @results = @p.result.includes(:category)
+    @results = @p.result.includes(:user)
   end
 
   private
