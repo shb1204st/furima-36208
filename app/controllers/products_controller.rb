@@ -64,7 +64,7 @@ class ProductsController < ApplicationController
   end
 
   def set_product_column
-    @product_name = Product.select("product_name").distinct  # 重複なくnameカラムのデータを取り出す
+    @product_name = Product.select("product_name").distinct
   end
 
 end

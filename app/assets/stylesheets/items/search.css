@@ -1,0 +1,12 @@
+.search {
+  margin-left: 30px;
+}
+
+.search-result {
+  color: green;
+  font-size: 50px;
+}
+
+.searched-list {
+  list-style: none;
+}
