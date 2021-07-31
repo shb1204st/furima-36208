@@ -1,8 +1,8 @@
 class ProductsController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: [:index, :show, :search, :keyword_search, :category_search, :detail_search]
   before_action :set_product, only: [:show, :edit, :update, :destroy]
   before_action :move_to_index, only: [:edit, :update, :destroy]
-  before_action :search_product, only: [:index, :search]
+  before_action :search_product, only: [:index, :show, :search, :category_search, :detail_search]
 
   def index
     @products = Product.all.order('created_at DESC')
@@ -42,6 +42,15 @@ class ProductsController < ApplicationController
 
   def search
     @results = @p.result.includes(:user)
+  end
+
+  def category_search
+    @results = @p.result.includes(:user)
+  end
+
+  def detail_search
+    @results = @p.result.includes(:user)
+    set_product_column 
   end
 
   private
