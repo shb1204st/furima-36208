@@ -1,20 +1,24 @@
-<h1>
-  検索結果
-</h1>
-<%# 検索結果の個数で条件分岐 %>
-<% if @results.length !=0 %>
-  <% @results.each do |result| %>
-    <br>
-    <li>
-      <%= result.product_name %>
-      <%= result.price %>
-      <%= result.product_statu.name %>
-      <%= result.category.name %>
-      <%= result.image %>
-    </li>
+<div class="search">
+  <h1 class="search-result">
+    検索結果
+  </h1>
+  <%# 検索結果の個数で条件分岐 %>
+  <% if @results.length !=0 %>
+    <% @results.each do |result| %>
+      <br>
+      <li class="searched-list">
+        商品名：<%= result.product_name %>
+        <br>
+        価格： <%= result.price %> 円
+        <br>
+        カテゴリー：<%= result.category.name %>
+        <br>
+        画像：<%= image_tag result.image %>
+      </li>
+    <% end %>
+  <% else %>
+    該当する商品はありません
   <% end %>
-<% else %>
-  該当する商品はありません
-<% end %>
-<br>
-<%= link_to 'トップページへ戻る', root_path %>
+  <br>
+  <%= link_to 'トップページへ戻る', root_path %>
+</div>
