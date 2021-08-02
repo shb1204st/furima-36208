@@ -6,5 +6,6 @@ Rails.application.routes.draw do
       get "search", "category-search", "detail_search"
     end
     resources :buys, only: [:index, :create]
+    resources :comments, only: [:create]
   end
 end
