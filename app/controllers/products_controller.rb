@@ -25,6 +25,9 @@ class ProductsController < ApplicationController
   def show
     @comment = Comment.new
     @comments = @product.comments.includes(:user)
+    if @comment.save
+      ActionCable.server.broadcast 'message_channel', content: @comment
+    end
   end
 
   def edit
