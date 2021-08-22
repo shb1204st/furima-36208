@@ -5,6 +5,7 @@
   <%# 検索結果の個数で条件分岐 %>
   <% if @results.length !=0 %>
     <% @results.each do |result| %>
+    <%= link_to product_path(result.id) do %>
       <br>
       <li class="searched-list">
         商品名：<%= result.product_name %>
@@ -13,12 +14,33 @@
         <br>
         カテゴリー：<%= result.category.name %>
         <br>
-        画像：<%= image_tag result.image %>
+        <div class='item-img-content-a'>
+          画像：<%= image_tag result.image, class:"item-img-a" %>
+          <% if result.buy %>
+            <div class='sold-out-a'>
+              <span class=>Sold Out!!</span>
+            </div>
+          <% end %>
+        </div> 
       </li>
+    <% end %>  
     <% end %>
   <% else %>
     該当する商品はありません
   <% end %>
   <br>
-  <%= link_to 'トップページへ戻る', root_path %>
+  <%= link_to 'トップページへ戻る', root_path, class:"back-to-top" %>
+
+  <footer class="items-sell-footer-a">
+      <ul class="menu">
+        <li><a href="#">プライバシーポリシー</a></li>
+        <li><a href="#">フリマ利用規約</a></li>
+        <li><a href="#">特定商取引に関する表記</a></li>
+      </ul>
+      <%= link_to image_tag('furima-logo-color.png' , size: '185x50'), "/" %>
+      <p class="inc">
+        ©︎Furima,Inc.
+      </p>
+    </footer>
+  </div>
 </div>
